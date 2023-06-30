@@ -22,7 +22,10 @@ class CommentServices {
     } else {
       let result = await DbServices_1.DataBase.commentsCollection.updateOne(
         {
-          userId: new mongodb_1.ObjectId(payload.userId),
+          $and: [
+            { userId: new mongodb_1.ObjectId(payload.userId) },
+            { productsId: new mongodb_1.ObjectId(payload.productsId) },
+          ],
         },
         {
           $set: {
